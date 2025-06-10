@@ -6,7 +6,7 @@ mod aoc15;
 fn main() {
     let now = Instant::now();
 
-    solve(2015, 2);
+    solve(2015, 3);
 
     println!("\nTime: {:.2}s", now.elapsed().as_secs_f64())
 }
@@ -22,6 +22,7 @@ fn solve15(day: u32) {
     match day {
         1 => aoc15::day01::solve(),
         2 => aoc15::day02::solve(),
+        3 => aoc15::day03::solve(),
         _ => println!("Invalid date"),
     }
 }

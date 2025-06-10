@@ -1,4 +1,4 @@
-use crate::aoc;
+use crate::aoc::io;
 
 pub fn solve() {
     let line = data(true);
@@ -10,8 +10,9 @@ pub fn solve() {
 }
 
 fn data(full: bool) -> String {
-    let lines = aoc::io::read_lines(full);
+    let lines = io::read_lines(full);
     lines.first().unwrap().to_string()
+    // lines.into_iter().nth(0).unwrap()
 }
 
 fn elevator_floor(line: &String, goal: Option<i32>) -> i32 {
