@@ -10,19 +10,17 @@ pub fn solve() {
 }
 
 fn data(full: bool) -> String {
-    let lines = io::read_lines(full);
-    lines.first().unwrap().to_string()
-    // lines.into_iter().nth(0).unwrap()
+    io::first_line(full)
 }
 
 fn elevator_floor(line: &String, goal: Option<i32>) -> i32 {
+    let has_goal = goal.is_some();
+    let goal = goal.unwrap_or(0);
     let mut level = 0;
     for (i, x) in line.chars().enumerate() {
         level += if x == '(' { 1 } else { - 1 };
-        if let Some(goal) = goal {
-            if goal == level {
-                return 1 + (i as i32);
-            }
+        if has_goal && goal == level {
+            return 1 + i as i32;
         }
     }
     level

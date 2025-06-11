@@ -1,6 +1,4 @@
-use std::iter;
-
-use crate::aoc::{io, str};
+use crate::aoc::{io, strings};
 
 pub fn solve() {
     let key = data(true);
@@ -13,16 +11,15 @@ pub fn solve() {
 }
 
 fn data(full: bool) -> String {
-    let lines = io::read_lines(full);
-    lines.first().unwrap().to_string()
+    io::first_line(full)
 }
 
 fn find_hash(key: &String, num_zeros: usize) -> u32 {
-    let goal: String = iter::repeat("0").take(num_zeros).collect();
+    let goal: String = strings::repeat_string("0", num_zeros);
     let mut i: u32 = 1;
     loop {
         let word = format!("{}{}", key, i);
-        let hash = str::md5_hash(&word);
+        let hash = strings::md5_hash(&word);
         if hash.starts_with(&goal) {
             return i;
         }

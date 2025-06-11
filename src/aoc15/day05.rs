@@ -1,6 +1,5 @@
 use std::collections::HashMap;
-
-use crate::aoc::{io, str};
+use crate::aoc::{io, strings};
 
 pub fn solve() {
     let words = data(true);
@@ -22,20 +21,22 @@ fn data(full: bool) -> Vec<String> {
     return io::read_lines(full);
 }
 
+const INVALIDS: [&str; 4] = ["ab", "cd", "pq", "xy"];
+const VOWELS: [char; 5] = ['a', 'e', 'i', 'o', 'u'];
+
 fn is_nice(word: &String) -> bool {
-    let invalids =  vec!["ab", "cd", "pq", "xy"];
-    let has_invalid = invalids.iter().any(|x| word.find(x).is_some());
+    let has_invalid = INVALIDS.iter().any(|invalid| word.find(invalid).is_some());
     if has_invalid {
         return false;
     }
 
-    if !str::has_twins(word, 0) {
+    if !strings::has_twins(word, 0) {
         return false;
     }
 
-    let freq = str::char_freq(word, None);
+    let freq = strings::char_freq(word, None);
     let mut num_vowels: u32 = 0;
-    for vowel in vec!['a', 'e', 'i', 'o', 'u']  {
+    for vowel in VOWELS{
         if let Some(count) = freq.get(&vowel) {
             num_vowels += count;
         }
@@ -44,7 +45,7 @@ fn is_nice(word: &String) -> bool {
 }
 
 fn is_nice2(word: &String) -> bool {
-    if !str::has_twins(word, 1) {
+    if !strings::has_twins(word, 1) {
         return false;
     }
 
@@ -53,8 +54,7 @@ fn is_nice2(word: &String) -> bool {
         if idxs.len() >= 3 {
             return true;
         } else if idxs.len() == 2 {
-            let i = idxs.as_slice();
-            if i[0].abs_diff(i[1]) >= 2 {
+            if idxs[0].abs_diff(idxs[1]) >= 2 {
                 return true;
             }
         }
@@ -63,11 +63,11 @@ fn is_nice2(word: &String) -> bool {
 }
 
 fn substring_positions(word: &String, length: usize) -> HashMap<String, Vec<usize>> {
-    let mut at: HashMap<String, Vec<usize>> = HashMap::new();
+    let mut group: HashMap<String, Vec<usize>> = HashMap::new();
     let limit = word.len() - (length-1);
     for i in 0..limit {
-        let sub = &word[i..i+length];
-        at.entry(sub.to_string()).or_insert(Vec::new()).push(i);
+        let sub = word[i..i+length].to_string();
+        group.entry(sub).or_insert(Vec::new()).push(i);
     }
-    at
+    group
 }

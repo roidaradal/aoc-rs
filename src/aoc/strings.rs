@@ -1,5 +1,4 @@
-use std::collections::HashMap;
-
+use std::{collections::HashMap, iter};
 use md5;
 
 pub fn md5_hash(word: &String) -> String {
@@ -19,14 +18,18 @@ pub fn has_twins(word: &String, gap: usize) -> bool{
 }
 
 pub fn char_freq(word: &String, skip: Option<Vec<char>>) -> HashMap<char,u32> {
+    let has_skip = skip.is_some();
+    let skip = skip.unwrap_or(Vec::new());
     let mut freq: HashMap<char, u32> = HashMap::new();
     for char in word.chars() {
-        if let Some(skip) = &skip {
-            if skip.contains(&char) {
-                continue;
-            }
+        if has_skip && skip.contains(&char) {
+            continue;
         }
         *freq.entry(char).or_insert(0) += 1;
     }
     freq
+}
+
+pub fn repeat_string(word: &str, repeat: usize) -> String {
+    iter::repeat(word).take(repeat).collect()
 }

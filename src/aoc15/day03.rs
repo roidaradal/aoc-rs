@@ -16,17 +16,15 @@ pub fn solve() {
 }
 
 fn data(full: bool) -> Vec<Delta> {
-    let t = HashMap::from([
+    let delta = HashMap::from([
         ('>', grid::R),
         ('<', grid::L),
         ('^', grid::U), 
         ('v', grid::D),
     ]);
-    io::read_lines(full)
-    .first()
-    .unwrap()
+    io::first_line(full)
     .chars()
-    .map(|x| t[&x])
+    .map(|x| delta[&x])
     .collect()
 }
 
@@ -36,7 +34,7 @@ fn walk(moves: &Vec<Delta>) -> HashSet<Coords> {
     visited.insert(start);
     let mut curr = start;
     for d in moves.iter() {
-        curr = grid::mov(curr, *d);
+        curr = grid::step(curr, *d);
         visited.insert(curr);
     }
     visited
