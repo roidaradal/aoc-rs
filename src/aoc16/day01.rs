@@ -1,14 +1,14 @@
 use std::collections::HashSet;
-use crate::aoc::{io, grid};
+use crate::aoc::{io, grid, strings};
 use crate::aoc::grid::{Coords, Delta, Int2};
 
 pub fn solve() {
     let moves = data(true);
-
-    let hq = find_hq(&moves, false);
+    let hq = find_hq(moves, false);
     println!("{}", grid::manhattan_origin(hq));
 
-    let hq = find_hq(&moves, true);
+    let moves = data(true);
+    let hq = find_hq(moves, true);
     println!("{}", grid::manhattan_origin(hq));
 }
 
@@ -20,19 +20,19 @@ fn data(full: bool) -> Vec<Int2> {
     .split(",")
     .map(|x| {
         let x = x.trim();
-        let turn = if x.chars().nth(0).unwrap() == 'L' { L } else { R };
+        let turn = if strings::nth_char(x, 0) == 'L' { L } else { R };
         let steps= x[1..].parse().unwrap();
         (turn, steps)
     })
     .collect()
 }
 
-fn find_hq(moves: &Vec<Int2>, at_visited_twice: bool) -> Coords {
+fn find_hq(moves: Vec<Int2>, at_visited_twice: bool) -> Coords {
     let mut curr: Coords = (0, 0);
     let mut d: Delta = grid::X;
     let mut visited: HashSet<Coords> = HashSet::new();
     for m in moves {
-        let (turn, steps) =  (m.0, m.1);
+        let (turn, steps) =  m;
         if d == grid::X {
             d = if turn == L { grid::L } else { grid::R };
         } else if turn == L {

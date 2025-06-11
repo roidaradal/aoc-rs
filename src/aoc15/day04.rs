@@ -2,11 +2,11 @@ use crate::aoc::{io, strings};
 
 pub fn solve() {
     let key = data(true);
-
-    let idx = find_hash(&key, 5);
+    let idx = find_hash(key, 5);
     println!("{}", idx);
 
-    let idx = find_hash(&key, 6);
+    let key = data(true);
+    let idx = find_hash(key, 6);
     println!("{}", idx);
 }
 
@@ -14,7 +14,7 @@ fn data(full: bool) -> String {
     io::first_line(full)
 }
 
-fn find_hash(key: &String, num_zeros: usize) -> u32 {
+fn find_hash(key: String, num_zeros: usize) -> u32 {
     let goal: String = strings::repeat_string("0", num_zeros);
     let mut i: u32 = 1;
     loop {

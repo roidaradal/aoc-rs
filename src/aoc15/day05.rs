@@ -5,11 +5,11 @@ pub fn solve() {
     let words = data(true);
     let mut count1: u32 = 0;
     let mut count2: u32 = 0;
-    for word in words.iter() {
-        if is_nice(word) {
+    for word in words {
+        if is_nice(&word) {
             count1 += 1;
         }
-        if is_nice2(word) {
+        if is_nice2(&word) {
             count2 += 1;
         }
     }

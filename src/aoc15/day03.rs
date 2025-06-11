@@ -4,13 +4,14 @@ use crate::aoc::grid::{Delta, Coords};
 
 pub fn solve() {
     let moves = data(true);
-    let visited = walk(&moves);
+    let visited = walk(moves);
     let count = visited.len();
     println!("{}", count);
 
+    let moves = data(true);
     let (santa, robo) = divide_moves(moves);
-    let v1 = walk(&santa);
-    let v2 = walk(&robo);
+    let v1 = walk(santa);
+    let v2 = walk(robo);
     let count = v1.union(&v2).count();
     println!("{}", count);
 }
@@ -28,13 +29,13 @@ fn data(full: bool) -> Vec<Delta> {
     .collect()
 }
 
-fn walk(moves: &Vec<Delta>) -> HashSet<Coords> {
+fn walk(moves: Vec<Delta>) -> HashSet<Coords> {
     let mut visited: HashSet<Coords> = HashSet::new();
     let start: Coords = (0, 0);
     visited.insert(start);
     let mut curr = start;
-    for d in moves.iter() {
-        curr = grid::step(curr, *d);
+    for d in moves {
+        curr = grid::step(curr, d);
         visited.insert(curr);
     }
     visited
@@ -43,12 +44,12 @@ fn walk(moves: &Vec<Delta>) -> HashSet<Coords> {
 fn divide_moves(moves: Vec<Delta>) -> (Vec<Delta>, Vec<Delta>) {
     let mut santa: Vec<Delta> = Vec::new();
     let mut robo: Vec<Delta> = Vec::new();
-    for (i, d) in moves.iter().enumerate() {
-        if i % 2 == 0 {
-            santa.push(*d);
-        } else {
-            robo.push(*d);
-        }
+    let mut i: usize = 0;
+    let limit = moves.len();
+    while i < limit {
+        santa.push(moves[i]);
+        robo.push(moves[i+1]);
+        i += 2;
     }
     (santa, robo)
 }

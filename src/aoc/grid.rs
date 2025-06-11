@@ -1,5 +1,6 @@
 pub type Coords = (i32, i32);
 pub type Delta  = (i32, i32);
+pub type Dims2  = (u32, u32);
 pub type Dims3  = (u32, u32, u32);
 pub type Int2   = (i32, i32);
 
@@ -33,18 +34,36 @@ pub fn step(c: Coords, d: Delta) -> Coords {
     (c.0 + d.0, c.1 + d.1)
 }
 
+pub fn inside_bounds(c: Coords, max_bounds: Dims2) -> bool {
+    inside_bounds_full(c, (0,0), max_bounds)
+}
+
+pub fn inside_bounds_full(c: Coords, min_bounds: Dims2, max_bounds: Dims2) -> bool {
+    let (row, col) = c;
+    let (min_rows, min_cols) = (min_bounds.0 as i32, min_bounds.1 as i32);
+    let (num_rows, num_cols) = (max_bounds.0 as i32, max_bounds.1 as i32);
+    min_rows <= row && row < num_rows && min_cols <= col && col < num_cols
+}
+
 pub fn to_dims3(line: &String, sep: &str) -> Dims3 {
-    let p: Vec<u32> = line 
+    let p: Vec<u32> = line
     .split(sep)
-    .map(|x| x.parse().unwrap())
+    .filter(|x| x.trim().len() > 0)
+    .map(|x| x.trim().parse().unwrap())
     .collect();
     (p[0], p[1], p[2])
 }
 
 pub fn manhattan(c1: Coords, c2: Coords) -> u32 {
-    c2.0.abs_diff(c1.0) + c2.1.abs_diff(c1.1)
+    let (y1, x1) = c1;
+    let (y2, x2) = c2;
+    y2.abs_diff(y1) + x2.abs_diff(x1)
 }
 
 pub fn manhattan_origin(c: Coords) -> u32 {
     manhattan(c, (0,0))
+}
+
+pub fn coords_to_index(c: Coords) -> (usize, usize) {
+    (c.0 as usize, c.1 as usize)
 }

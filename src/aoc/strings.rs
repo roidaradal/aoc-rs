@@ -33,3 +33,7 @@ pub fn char_freq(word: &String, skip: Option<Vec<char>>) -> HashMap<char,u32> {
 pub fn repeat_string(word: &str, repeat: usize) -> String {
     iter::repeat(word).take(repeat).collect()
 }
+
+pub fn nth_char(word: &str, n: usize) -> char {
+    word.chars().nth(n).unwrap()
+}

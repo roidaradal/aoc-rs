@@ -2,10 +2,11 @@ use crate::aoc::io;
 
 pub fn solve() {
     let line = data(true);
-    let level = elevator_floor(&line, None);
+    let level = elevator_floor(line, None);
     println!("{}", level);
 
-    let level = elevator_floor(&line, Some(-1));
+    let line = data(true);
+    let level = elevator_floor(line, Some(-1));
     println!("{}", level);
 }
 
@@ -13,7 +14,7 @@ fn data(full: bool) -> String {
     io::first_line(full)
 }
 
-fn elevator_floor(line: &String, goal: Option<i32>) -> i32 {
+fn elevator_floor(line: String, goal: Option<i32>) -> i32 {
     let has_goal = goal.is_some();
     let goal = goal.unwrap_or(0);
     let mut level = 0;
