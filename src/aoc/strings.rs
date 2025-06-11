@@ -37,3 +37,7 @@ pub fn repeat_string(word: &str, repeat: usize) -> String {
 pub fn nth_char(word: &str, n: usize) -> char {
     word.chars().nth(n).unwrap()
 }
+
+pub fn next_char(c: char) -> char {
+    char::from_u32(c as u32 + 1).unwrap()
+}
