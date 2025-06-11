@@ -20,7 +20,7 @@ pub fn solve() {
 fn data(full: bool) -> Vec<Room> {
     io::read_lines(full)
     .iter()
-    .map(new_room)
+    .map(Room::new)
     .collect()
 }
 
@@ -30,25 +30,25 @@ struct Room {
     id      : u32,
 }
 
-fn new_room(line: &String) -> Room {
-    let p: Vec<&str> = line
-    .split("[")
-    .map(|x| x.trim())
-    .collect();
-    let h: Vec<&str> = p[0]
-    .split("-")
-    .map(|x| x.trim())
-    .collect();
-    let last = h.len() - 1;
-    let checksum = p[1].strip_suffix("]").unwrap();
-    Room{
-        checksum: String::from(checksum),
-        name    : h[0..last].join("-"),
-        id      : h[last].parse().unwrap(),
-    }
-}
-
 impl Room {
+    fn new(line: &String) -> Room {
+        let p: Vec<&str> = line
+        .split("[")
+        .map(|x| x.trim())
+        .collect();
+        let h: Vec<&str> = p[0]
+        .split("-")
+        .map(|x| x.trim())
+        .collect();
+        let last = h.len() - 1;
+        let checksum = p[1].strip_suffix("]").unwrap();
+        Room{
+            checksum: String::from(checksum),
+            name    : h[0..last].join("-"),
+            id      : h[last].parse().unwrap(),
+        }
+    }
+
     fn is_real(&self) -> bool {
         let skip = Some(vec!['-']);
         let freq = strings::char_freq(&self.name, skip);
