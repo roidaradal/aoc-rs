@@ -1,5 +1,5 @@
-use crate::aoc::io;
-use crate::aoc::grid::{Dims3, to_dims3};
+use crate::aoc::{io, conv};
+use crate::aoc::grid::Dims3;
 
 pub fn solve() {
     let items = data(true);
@@ -23,6 +23,6 @@ pub fn solve() {
 fn data(full: bool) -> Vec<Dims3> {
     io::read_lines(full)
     .iter()
-    .map(|x| to_dims3(x, "x"))
+    .map(|x| conv::to_dims3(x, "x"))
     .collect()
 }

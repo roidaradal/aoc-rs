@@ -45,14 +45,6 @@ pub fn inside_bounds_full(c: Coords, min_bounds: Dims2, max_bounds: Dims2) -> bo
     min_rows <= row && row < num_rows && min_cols <= col && col < num_cols
 }
 
-pub fn to_dims3(line: &String, sep: &str) -> Dims3 {
-    let p: Vec<u32> = line
-    .split(sep)
-    .filter(|x| x.trim().len() > 0)
-    .map(|x| x.trim().parse().unwrap())
-    .collect();
-    (p[0], p[1], p[2])
-}
 
 pub fn manhattan(c1: Coords, c2: Coords) -> u32 {
     let (y1, x1) = c1;
