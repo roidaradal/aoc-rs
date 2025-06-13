@@ -2,6 +2,7 @@ pub type Coords = (i32, i32);
 pub type Delta  = (i32, i32);
 pub type Dims2  = (u32, u32);
 pub type Dims3  = (u32, u32, u32);
+pub type Grid<T> = Vec<Vec<T>>;
 
 pub const U: Delta = (-1, 0);
 pub const D: Delta = (1, 0);
@@ -44,7 +45,6 @@ pub fn inside_bounds_full(c: Coords, min_bounds: Dims2, max_bounds: Dims2) -> bo
     min_rows <= row && row < num_rows && min_cols <= col && col < num_cols
 }
 
-
 pub fn manhattan(c1: Coords, c2: Coords) -> u32 {
     let (y1, x1) = c1;
     let (y2, x2) = c2;
@@ -66,4 +66,13 @@ pub fn surround8(c: Coords) -> Vec<Coords> {
         (y,x-1), (y,x+1),
         (y+1,x-1), (y+1,x), (y+1,x+1),
     ]
+}
+
+pub fn new<T: Copy>(initial: T, rows: usize, cols: usize) -> Grid<T> {
+    let mut grid: Grid<T> = Vec::new();
+    for _ in 0..rows {
+        let line: Vec<T> = vec![initial; cols];
+        grid.push(line);
+    }
+    grid
 }

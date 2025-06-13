@@ -9,7 +9,7 @@ mod aoc18;
 fn main() {
     let now = Instant::now();
 
-    solve(18, 2);
+    solve(18, 3);
 
     println!("\nTime: {:.2}s", now.elapsed().as_secs_f64())
 }
@@ -61,6 +61,7 @@ fn solve18(day: u8) {
     match day {
         1 => aoc18::day01::solve(),
         2 => aoc18::day02::solve(),
+        3 => aoc18::day03::solve(),
         _ => println!("Invalid day"),
     }
 }
