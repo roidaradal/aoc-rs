@@ -1,6 +1,6 @@
 use std::collections::HashSet;
-use crate::aoc::{io, grid, strings};
-use crate::aoc::grid::{Coords, Delta, Int2};
+use crate::aoc::{io, grid, strings, Int2};
+use crate::aoc::grid::{Coords, Delta};
 
 pub fn solve() {
     let moves = data(true);

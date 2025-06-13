@@ -2,7 +2,6 @@ pub type Coords = (i32, i32);
 pub type Delta  = (i32, i32);
 pub type Dims2  = (u32, u32);
 pub type Dims3  = (u32, u32, u32);
-pub type Int2   = (i32, i32);
 
 pub const U: Delta = (-1, 0);
 pub const D: Delta = (1, 0);
@@ -58,4 +57,13 @@ pub fn manhattan_origin(c: Coords) -> u32 {
 
 pub fn coords_to_index(c: Coords) -> (usize, usize) {
     (c.0 as usize, c.1 as usize)
+}
+
+pub fn surround8(c: Coords) -> Vec<Coords> {
+    let (y, x) = c;
+    vec![
+        (y-1,x-1), (y-1,x), (y-1,x+1),
+        (y,x-1), (y,x+1),
+        (y+1,x-1), (y+1,x), (y+1,x+1),
+    ]
 }

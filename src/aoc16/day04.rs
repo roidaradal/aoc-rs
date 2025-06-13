@@ -70,11 +70,9 @@ impl Room {
     fn decrypt(&self) -> String {
         let mut msg: Vec<char> = self.name.chars().collect();
         for _ in 0..self.id {
-            let mut msg2: Vec<char> = Vec::new();
-            for letter in msg.iter() {
-                msg2.push(rotate_letter(*letter));
+            for letter in msg.iter_mut() {
+                *letter = rotate_letter(*letter);
             }
-            msg = msg2;
         }
         msg.iter().collect()
     }
