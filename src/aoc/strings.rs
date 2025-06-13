@@ -1,4 +1,4 @@
-use std::{collections::HashMap, iter};
+use std::{collections::HashMap, iter, str};
 use md5;
 
 pub fn md5_hash(word: &String) -> String {
@@ -40,4 +40,10 @@ pub fn nth_char(word: &str, n: usize) -> char {
 
 pub fn next_char(c: char) -> char {
     char::from_u32(c as u32 + 1).unwrap()
+}
+
+pub fn sorted(word: &str) -> String {
+    let mut letters: Vec<char> = word.chars().collect();
+    letters.sort();
+    letters.iter().collect()
 }
