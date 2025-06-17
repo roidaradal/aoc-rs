@@ -1,7 +1,6 @@
 use std::env;
 use std::time::Instant;
 use dotenv::dotenv;
-
 use crate::aoc::Solution;
 
 mod aoc;
@@ -9,6 +8,7 @@ mod aoc15;
 mod aoc16;
 mod aoc17;
 mod aoc18;
+mod aoc19;
 
 fn main() {
     let args: Vec<String> = env::args().skip(1).collect();
@@ -17,9 +17,9 @@ fn main() {
         return;
     }
 
-    let arg = &args[0];
-    let year: u8 = arg[..2].parse().unwrap();
-    let day: u8 = arg[2..].parse().unwrap();
+    let yydd = &args[0];
+    let year: u8 = yydd[..2].parse().unwrap();
+    let day: u8 = yydd[2..].parse().unwrap();
     let test_mode = args.len() >= 2 && args[1] == "test";
     
     dotenv().ok();
@@ -32,12 +32,12 @@ fn main() {
         if ans1 == sol1 {
             println!("OK1: {}", sol1);
         } else {
-            println!("Part1:\nExp: {}\nGot: {}", sol1, ans1)
+            println!("Part1: Exp vs Got:\n{}\n{}", sol1, ans1);
         }
         if ans2 == sol2 {
             println!("OK2: {}", sol2);
         } else {
-            println!("Part2:\nExp: {}\nGot: {}", sol2, ans2)
+            println!("Part2: Exp vs Got:\n{}\n{}", sol2, ans2);
         }
     } else {
         println!("{}", ans1);
@@ -53,7 +53,8 @@ fn solve(year: u8, day: u8) -> Solution {
         16 => solve16(day),
         17 => solve17(day),
         18 => solve18(day),
-        _ => panic!("Invalid day")
+        19 => solve19(day),
+        _ => panic!("Invalid year")
     }
 }
 
@@ -97,6 +98,13 @@ fn solve18(day: u8) -> Solution {
         3 => aoc18::day03::solve(),
         4 => aoc18::day04::solve(),
         5 => aoc18::day05::solve(),
+        _ => panic!("Invalid day"),
+    }
+}
+
+fn solve19(day: u8) -> Solution {
+    match day {
+        1 => aoc19::day01::solve(),
         _ => panic!("Invalid day"),
     }
 }
