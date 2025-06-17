@@ -1,17 +1,19 @@
-use crate::aoc::{io, strings};
+use crate::aoc::{io, strings, Solution};
 
-pub fn solve() {
+pub fn solve() -> Solution {
+    // Part 1
     let key = data(true);
-    let idx = find_hash(key, 5);
-    println!("{}", idx);
+    let idx1 = find_hash(key, 5);
 
+    // Part 2
     let key = data(true);
-    let idx = find_hash(key, 6);
-    println!("{}", idx);
+    let idx2 = find_hash(key, 6);
+
+    io::solution(idx1, idx2)
 }
 
 fn data(full: bool) -> String {
-    io::first_line(full)
+    io::first_line(15, 4, full)
 }
 
 fn find_hash(key: String, num_zeros: usize) -> u32 {

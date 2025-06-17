@@ -1,29 +1,31 @@
 use std::collections::HashMap;
-use crate::aoc::{io, grid};
+use crate::aoc::{grid, io, Solution};
 use crate::aoc::grid::{Coords, Dims2};
 
-pub fn solve() {
+pub fn solve() -> Solution {
+    // Part 1
     let moves_list = data(true);
     let pad = Keypad{
         grid        : create_grid(vec!["123", "456", "789"]),
         start       : (0, 0),
         max_bounds  : (3, 3),
     };
-    let code = solve_code(pad, moves_list);
-    println!("{}", code);
+    let part1 = solve_code(pad, moves_list);
 
+    // Part 2
     let moves_list = data(true);
     let pad = Keypad{
         grid        : create_grid(vec!["00100", "02340", "56789", "0ABC0", "00D00"]), 
         start       : (2, 0),
         max_bounds  : (5, 5),
     };
-    let code = solve_code(pad, moves_list);
-    println!("{}", code);
+    let part2 = solve_code(pad, moves_list);
+
+    io::solution(part1, part2)
 }
 
 fn data(full: bool) -> Vec<String> {
-    io::read_lines(full)
+    io::read_lines(16, 2, full)
 }
 
 struct Keypad {

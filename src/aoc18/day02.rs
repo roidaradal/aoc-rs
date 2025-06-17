@@ -1,7 +1,8 @@
 use itertools::Itertools;
-use crate::aoc::{io, strings};
+use crate::aoc::{io, strings, Solution};
 
-pub fn solve() {
+pub fn solve() -> Solution {
+    // Part 1
     let words = data(true);
     let mut count2: u32 = 0;
     let mut count3: u32 = 0;
@@ -14,21 +15,25 @@ pub fn solve() {
             count3 += 1;
         }
     }
-    println!("{}", count2 * count3);
+    let part1 = count2 * count3;
 
+    // Part 2
+    let mut part2: String = String::new();
     for pair in words.iter().combinations(2) {
         let (word1, word2) = (pair[0], pair[1]);
         let diff = str_diff(word1, word2);
-        if diff.len() != 1 { continue; }
-
-        let idx = diff[0];
-        println!("{}{}", &word1[..idx], &word1[idx+1..]);
-        break;
+        if diff.len() == 1 {
+            let idx = diff[0];
+            part2 = format!("{}{}", &word1[..idx], &word1[idx+1..]);
+            break;
+        }
     }
+
+    io::solution(part1, part2)
 }
 
 fn data(full: bool) -> Vec<String> {
-    io::read_lines(full)
+    io::read_lines(18, 2, full)
 }
 
 fn str_diff(word1: &str, word2: &str) -> Vec<usize> {

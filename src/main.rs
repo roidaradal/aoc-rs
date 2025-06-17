@@ -1,4 +1,8 @@
+use std::env;
 use std::time::Instant;
+use dotenv::dotenv;
+
+use crate::aoc::Solution;
 
 mod aoc;
 mod aoc15;
@@ -7,61 +11,91 @@ mod aoc17;
 mod aoc18;
 
 fn main() {
+    let args: Vec<String> = env::args().skip(1).collect();
+    if args.len() < 1 {
+        println!("Usage: cargo run -- yydd (test)");
+        return;
+    }
+
+    let arg = &args[0];
+    let year: u8 = arg[..2].parse().unwrap();
+    let day: u8 = arg[2..].parse().unwrap();
+    let test_mode = args.len() >= 2 && args[1] == "test";
+    
+    dotenv().ok();
+    let (sol1, sol2) = aoc::io::get_solution(year, day);
+    
     let now = Instant::now();
 
-    solve(18, 3);
+    let (ans1, ans2) = solve(year, day);
+    if test_mode {
+        if ans1 == sol1 {
+            println!("OK1: {}", sol1);
+        } else {
+            println!("Part1:\nExp: {}\nGot: {}", sol1, ans1)
+        }
+        if ans2 == sol2 {
+            println!("OK2: {}", sol2);
+        } else {
+            println!("Part2:\nExp: {}\nGot: {}", sol2, ans2)
+        }
+    } else {
+        println!("{}", ans1);
+        println!("{}", ans2);
+    }
 
     println!("\nTime: {:.2}s", now.elapsed().as_secs_f64())
 }
 
-fn solve(year: u8, day: u8) {
+fn solve(year: u8, day: u8) -> Solution {
     match year {
         15 => solve15(day),
         16 => solve16(day),
         17 => solve17(day),
         18 => solve18(day),
-        _ => println!("Invalid year"),
+        _ => panic!("Invalid day")
     }
 }
 
-fn solve15(day: u8) {
+fn solve15(day: u8) -> Solution {
     match day {
         1 => aoc15::day01::solve(),
         2 => aoc15::day02::solve(),
         3 => aoc15::day03::solve(),
         4 => aoc15::day04::solve(),
         5 => aoc15::day05::solve(),
-        _ => println!("Invalid day"),
+        _ => panic!("Invalid day"),
     }
 }
 
-fn solve16(day: u8) {
+fn solve16(day: u8) -> Solution {
     match day {
         1 => aoc16::day01::solve(),
         2 => aoc16::day02::solve(),
         3 => aoc16::day03::solve(),
         4 => aoc16::day04::solve(),
         5 => aoc16::day05::solve(),
-        _ => println!("Invalid day"),
+        _ => panic!("Invalid day"),
     }
 }
 
-fn solve17(day: u8) {
+fn solve17(day: u8) -> Solution {
     match day {
         1 => aoc17::day01::solve(),
         2 => aoc17::day02::solve(),
         3 => aoc17::day03::solve(),
         4 => aoc17::day04::solve(),
         5 => aoc17::day05::solve(),
-        _ => println!("Invalid day"),
+        _ => panic!("Invalid day"),
     }
 }
 
-fn solve18(day: u8) {
+fn solve18(day: u8) -> Solution {
     match day {
         1 => aoc18::day01::solve(),
         2 => aoc18::day02::solve(),
         3 => aoc18::day03::solve(),
-        _ => println!("Invalid day"),
+        4 => aoc18::day04::solve(),
+        _ => panic!("Invalid day"),
     }
 }

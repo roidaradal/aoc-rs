@@ -1,22 +1,26 @@
 use std::collections::HashSet;
-use crate::aoc::{io, grid, strings, Int2};
+use crate::aoc::{grid, io, strings, Int2, Solution};
 use crate::aoc::grid::{Coords, Delta};
 
-pub fn solve() {
+pub fn solve() -> Solution {
+    // Part 1
     let moves = data(true);
     let hq = find_hq(moves, false);
-    println!("{}", grid::manhattan_origin(hq));
+    let dist1 = grid::manhattan_origin(hq);
 
+    // Part 2
     let moves = data(true);
     let hq = find_hq(moves, true);
-    println!("{}", grid::manhattan_origin(hq));
+    let dist2 = grid::manhattan_origin(hq);
+
+    io::solution(dist1, dist2)
 }
 
 const L: i32 = -1;
 const R: i32 = 1;
 
 fn data(full: bool) -> Vec<Int2> {
-    io::first_line(full)
+    io::first_line(16, 1, full)
     .split(",")
     .map(|x| {
         let x = x.trim();

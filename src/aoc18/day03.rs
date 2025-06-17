@@ -1,11 +1,11 @@
 use std::collections::HashSet;
-use crate::aoc::{io, conv, grid};
+use crate::aoc::{conv, grid, io, Solution};
 use crate::aoc::grid::{Coords, Dims2, Grid};
-
 
 type Claim = (u32, Coords, Dims2);
 
-pub fn solve() {
+pub fn solve() -> Solution {
+    // Part 1
     let claims = data(true);
     let mut g: Grid<u32> = grid::new(0, 1000, 1000);
     for (_, (row, col), (h,w)) in claims {
@@ -24,8 +24,8 @@ pub fn solve() {
         line.iter().filter(|x| **x > 1).count()
     })
     .sum();
-    println!("{}", count);
 
+    // Part 2
     let claims = data(true);
     let mut g: Grid<u32> = grid::new(0, 1000, 1000);
     let mut clean: HashSet<u32> = HashSet::new();
@@ -51,13 +51,14 @@ pub fn solve() {
             clean.insert(id);
         }
     }
-    for id in clean {
-        println!("{}", id);
-    }
+    let ids: Vec<u32> = clean.into_iter().take(1).collect();
+    let id = ids[0];
+    
+    io::solution(count, id)
 }
 
 fn data(full: bool) -> Vec<Claim> {
-    io::read_lines(full)
+    io::read_lines(18, 3, full)
     .iter()
     .map(|x| new_claim(x))
     .collect()

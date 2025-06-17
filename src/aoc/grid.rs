@@ -63,16 +63,11 @@ pub fn surround8(c: Coords) -> Vec<Coords> {
     let (y, x) = c;
     vec![
         (y-1,x-1), (y-1,x), (y-1,x+1),
-        (y,x-1), (y,x+1),
+        (y-0,x-1),          (y-0,x+1),
         (y+1,x-1), (y+1,x), (y+1,x+1),
     ]
 }
 
 pub fn new<T: Copy>(initial: T, rows: usize, cols: usize) -> Grid<T> {
-    let mut grid: Grid<T> = Vec::new();
-    for _ in 0..rows {
-        let line: Vec<T> = vec![initial; cols];
-        grid.push(line);
-    }
-    grid
+    vec![vec![initial; cols]; rows]
 }

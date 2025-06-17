@@ -1,12 +1,12 @@
 use std::collections::HashSet;
+use crate::aoc::{io, Solution};
 
-use crate::aoc::io;
-
-pub fn solve() {
+pub fn solve() -> Solution {
+    // Part 1
     let numbers = data(true);
     let total: i32 = numbers.iter().sum();
-    println!("{}", total);
 
+    // Part 2
     let limit = numbers.len();
     let mut i: usize = 0;
     let mut curr = 0;
@@ -19,11 +19,12 @@ pub fn solve() {
         done.insert(curr);
         i = (i+1) % limit;
     }
-    println!("{}", curr);
+
+    io::solution(total, curr)
 }
 
 fn data(full: bool) -> Vec<i32> {
-    io::read_lines(full)
+    io::read_lines(18, 1, full)
     .iter()
     .map(|x| x.parse().unwrap())
     .collect()

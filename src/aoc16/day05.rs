@@ -1,6 +1,7 @@
-use crate::aoc::{io, strings};
+use crate::aoc::{io, strings, Solution};
 
-pub fn solve() {
+pub fn solve() -> Solution {
+    // Part 1
     let door = data(true);
     let mut hash_gen = MD5HashGenerator{
         key : door, 
@@ -8,14 +9,16 @@ pub fn solve() {
         i   : 0,
     };
     let mut pwd = ['.'; 8];
-    for i in 0..8 {
+    for i in 0..8_usize {
         let (_, hash) = hash_gen.next().unwrap();
-        pwd[i as usize] = strings::nth_char(&hash, 5);
+        pwd[i] = strings::nth_char(&hash, 5);
 
         let tmp: String = pwd.iter().collect();
         println!("{}", tmp);
     }
+    let part1: String = pwd.iter().collect();
 
+    // Part 2
     let door = data(true);
     let mut hash_gen = MD5HashGenerator{
         key : door, 
@@ -32,19 +35,23 @@ pub fn solve() {
         }
         if pwd[idx] == '.' {
             pwd[idx] = strings::nth_char(&hash, 6);
-
+            
             let tmp: String = pwd.iter().collect();
             println!("{}", tmp);
         }
+
 
         if pwd.iter().all(|x| *x != '.') {
             break;
         }
     }
+    let part2: String = pwd.iter().collect();
+
+    io::solution(part1, part2)
 }
 
 fn data(full: bool) -> String {
-    io::first_line(full)
+    io::first_line(16, 5, full)
 }
 
 struct MD5HashGenerator {

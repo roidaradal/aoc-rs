@@ -1,24 +1,26 @@
 use std::collections::HashMap;
-use crate::aoc::{io, strings};
+use crate::aoc::{io, strings, Solution};
 
-pub fn solve() {
+pub fn solve() -> Solution {
     let words = data(true);
     let mut count1: u32 = 0;
     let mut count2: u32 = 0;
     for word in words {
+        // Part 1
         if is_nice(&word) {
             count1 += 1;
         }
+
+        // Part 2
         if is_nice2(&word) {
             count2 += 1;
         }
     }
-    println!("{}", count1);
-    println!("{}", count2);
+    io::solution(count1, count2)
 }
 
 fn data(full: bool) -> Vec<String> {
-    return io::read_lines(full);
+    return io::read_lines(15, 5, full);
 }
 
 const INVALIDS: [&str; 4] = ["ab", "cd", "pq", "xy"];
@@ -49,7 +51,7 @@ fn is_nice2(word: &String) -> bool {
         return false;
     }
 
-    let pairs = substring_positions(word, 2);
+    let pairs = substring_groups(word, 2);
     for idxs in pairs.values() {
         if idxs.len() >= 3 {
             return true;
@@ -62,7 +64,7 @@ fn is_nice2(word: &String) -> bool {
     false
 }
 
-fn substring_positions(word: &String, length: usize) -> HashMap<String, Vec<usize>> {
+fn substring_groups(word: &String, length: usize) -> HashMap<String, Vec<usize>> {
     let mut group: HashMap<String, Vec<usize>> = HashMap::new();
     let limit = word.len() - (length-1);
     for i in 0..limit {

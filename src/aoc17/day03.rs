@@ -1,12 +1,14 @@
 use std::collections::HashMap;
-use crate::aoc::{grid, io};
+use crate::aoc::{grid, io, Solution};
 use crate::aoc::grid::Coords;
 
-pub fn solve() {
+pub fn solve() -> Solution {
+    // Part 1
     let x = data(true);
     let c = spiral_coords(x);
-    println!("{}", grid::manhattan_origin(c));
+    let dist = grid::manhattan_origin(c);
 
+    // Part 2
     let goal = x;
     let mut spiral: HashMap<Coords, u32> = HashMap::new();
     spiral.insert((0,0), 1);
@@ -30,11 +32,12 @@ pub fn solve() {
         spiral.insert(curr, x);
         x += 1;
     }
-    println!("{}", value);
+
+    io::solution(dist, value)
 }
 
 fn data(full: bool) -> u32 {
-    io::first_line(full).parse().unwrap()
+    io::first_line(17, 3, full).parse().unwrap()
 }
 
 fn spiral_coords(x: u32) -> Coords {

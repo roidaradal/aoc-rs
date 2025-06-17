@@ -1,24 +1,25 @@
-use crate::aoc::{io, strings};
+use crate::aoc::{io, strings, Solution};
 
-pub fn solve() {
+pub fn solve() -> Solution {
     let rooms = data(true);
     let mut total: u32 = 0;
     let mut room_id: u32 = 0;
-    let goal = String::from("northpole-object-storage");
     for room in rooms {
+        // Part 1
         if room.is_real() {
             total += room.id;
         }
-        if room_id == 0 && room.decrypt() == goal {
+
+        // Part 2
+        if room_id == 0 && room.decrypt() == "northpole-object-storage" {
             room_id = room.id;
         }
     }
-    println!("{}", total);
-    println!("{}", room_id);
+    io::solution(total, room_id)
 }
 
 fn data(full: bool) -> Vec<Room> {
-    io::read_lines(full)
+    io::read_lines(16, 4, full)
     .iter()
     .map(Room::new)
     .collect()
@@ -41,9 +42,9 @@ impl Room {
         .map(|x| x.trim())
         .collect();
         let last = h.len() - 1;
-        let checksum = p[1].strip_suffix("]").unwrap();
+        let checksum = p[1].strip_suffix("]").unwrap().to_string();
         Room{
-            checksum: String::from(checksum),
+            checksum,
             name    : h[0..last].join("-"),
             id      : h[last].parse().unwrap(),
         }

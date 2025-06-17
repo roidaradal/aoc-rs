@@ -1,19 +1,21 @@
 use std::collections::{HashMap, HashSet};
-use crate::aoc::{io, grid};
+use crate::aoc::{grid, io, Solution};
 use crate::aoc::grid::{Delta, Coords};
 
-pub fn solve() {
+pub fn solve() -> Solution {
+    // Part 1
     let moves = data(true);
     let visited = walk(moves);
-    let count = visited.len();
-    println!("{}", count);
+    let count1 = visited.len();
 
+    // Part 2
     let moves = data(true);
     let (santa, robo) = divide_moves(moves);
     let v1 = walk(santa);
     let v2 = walk(robo);
-    let count = v1.union(&v2).count();
-    println!("{}", count);
+    let count2 = v1.union(&v2).count();
+
+    io::solution(count1, count2)
 }
 
 fn data(full: bool) -> Vec<Delta> {
@@ -23,7 +25,7 @@ fn data(full: bool) -> Vec<Delta> {
         ('^', grid::U), 
         ('v', grid::D),
     ]);
-    io::first_line(full)
+    io::first_line(15, 3, full)
     .chars()
     .map(|x| delta[&x])
     .collect()
@@ -44,12 +46,10 @@ fn walk(moves: Vec<Delta>) -> HashSet<Coords> {
 fn divide_moves(moves: Vec<Delta>) -> (Vec<Delta>, Vec<Delta>) {
     let mut santa: Vec<Delta> = Vec::new();
     let mut robo: Vec<Delta> = Vec::new();
-    let mut i: usize = 0;
     let limit = moves.len();
-    while i < limit {
+    for i in (0..limit).step_by(2) {
         santa.push(moves[i]);
         robo.push(moves[i+1]);
-        i += 2;
     }
     (santa, robo)
 }

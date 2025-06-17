@@ -1,24 +1,26 @@
 use std::collections::HashMap;
-use crate::aoc::{io, strings};
+use crate::aoc::{io, strings, Solution};
 
-pub fn solve() {
+pub fn solve() -> Solution {
     let phrases = data(true);
     let mut count1: u32 = 0;
     let mut count2: u32 = 0;
     for phrase in phrases.iter() {
+        // Part 1
         if is_valid(phrase, false) {
             count1 += 1;
         }
+
+        // Part 2
         if is_valid(phrase, true) {
             count2 += 1;
         }
     }
-    println!("{}", count1);
-    println!("{}", count2);
+    io::solution(count1, count2)
 }
 
 fn data(full: bool) -> Vec<Vec<String>> {
-    io::read_lines(full)
+    io::read_lines(17, 4, full)
     .iter()
     .map(|line| line.split_whitespace().map(String::from).collect())
     .collect()
