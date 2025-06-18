@@ -21,9 +21,9 @@ pub fn solve() -> Solution {
 
 fn data(full: bool) -> Vec<Vec<String>> {
     io::read_lines(17, 4, full)
-    .iter()
-    .map(|line| line.split_whitespace().map(String::from).collect())
-    .collect()
+        .iter()
+        .map(|line| line.split_whitespace().map(String::from).collect())
+        .collect()
 }
 
 fn is_valid(phrase: &Vec<String>, sort_word: bool) -> bool {

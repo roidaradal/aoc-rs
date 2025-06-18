@@ -25,7 +25,7 @@ pub fn solve() -> Solution {
 
 fn data(full: bool) -> Vec<i32> {
     io::read_lines(18, 1, full)
-    .iter()
-    .map(|x| x.parse().unwrap())
-    .collect()
+        .iter()
+        .map(|x| x.parse().unwrap())
+        .collect()
 }

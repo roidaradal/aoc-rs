@@ -21,14 +21,14 @@ const R: i32 = 1;
 
 fn data(full: bool) -> Vec<Int2> {
     io::first_line(16, 1, full)
-    .split(",")
-    .map(|x| {
-        let x = x.trim();
-        let turn = if strings::nth_char(x, 0) == 'L' { L } else { R };
-        let steps= x[1..].parse().unwrap();
-        (turn, steps)
-    })
-    .collect()
+        .split(",")
+        .map(|x| {
+            let x = x.trim();
+            let turn = if strings::nth_char(x, 0) == 'L' { L } else { R };
+            let steps= x[1..].parse().unwrap();
+            (turn, steps)
+        })
+        .collect()
 }
 
 fn find_hq(moves: Vec<Int2>, at_visited_twice: bool) -> Coords {

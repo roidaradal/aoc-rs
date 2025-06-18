@@ -16,9 +16,9 @@ pub fn solve() -> Solution {
 
 fn data(full: bool) -> Vec<Dims3> {
     io::read_lines(16, 3, full)
-    .iter()
-    .map(|x| conv::to_dims3(x, " "))
-    .collect()
+        .iter()
+        .map(|x| conv::to_dims3(x, " "))
+        .collect()
 }
 
 fn count_valid_triples(triples: Vec<Dims3>) -> u32 {

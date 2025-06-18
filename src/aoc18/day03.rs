@@ -19,11 +19,11 @@ pub fn solve() -> Solution {
         }
     }
     let count: usize = g
-    .iter()
-    .map(|line| {
-        line.iter().filter(|x| **x > 1).count()
-    })
-    .sum();
+        .iter()
+        .map(|line| {
+            line.iter().filter(|x| **x > 1).count()
+        })
+        .sum();
 
     // Part 2
     let claims = data(true);
@@ -59,21 +59,21 @@ pub fn solve() -> Solution {
 
 fn data(full: bool) -> Vec<Claim> {
     io::read_lines(18, 3, full)
-    .iter()
-    .map(|x| new_claim(x))
-    .collect()
+        .iter()
+        .map(|x| new_claim(x))
+        .collect()
 }
 
 fn new_claim(line: &String) -> Claim {
     let parts: Vec<&str> = line
-    .split("@")
-    .map(str::trim)
-    .collect();
+        .split("@")
+        .map(str::trim)
+        .collect();
     let claim_id: u32 = parts[0].strip_prefix("#").unwrap().parse().unwrap();
     let parts: Vec<String> = parts[1]
-    .split(":")
-    .map(|x|  String::from(x.trim()))
-    .collect();
+        .split(":")
+        .map(|x|  String::from(x.trim()))
+        .collect();
     let coords = conv::to_coords(&parts[0], ",", false);
     let dims = conv::to_dims2(&parts[1], "x", false);
     (claim_id, coords, dims)

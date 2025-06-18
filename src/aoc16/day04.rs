@@ -20,9 +20,9 @@ pub fn solve() -> Solution {
 
 fn data(full: bool) -> Vec<Room> {
     io::read_lines(16, 4, full)
-    .iter()
-    .map(Room::new)
-    .collect()
+        .iter()
+        .map(Room::new)
+        .collect()
 }
 
 struct Room {
@@ -34,13 +34,13 @@ struct Room {
 impl Room {
     fn new(line: &String) -> Room {
         let p: Vec<&str> = line
-        .split("[")
-        .map(|x| x.trim())
-        .collect();
+            .split("[")
+            .map(|x| x.trim())
+            .collect();
         let h: Vec<&str> = p[0]
-        .split("-")
-        .map(|x| x.trim())
-        .collect();
+            .split("-")
+            .map(|x| x.trim())
+            .collect();
         let last = h.len() - 1;
         let checksum = p[1].strip_suffix("]").unwrap().to_string();
         Room{
@@ -62,9 +62,9 @@ impl Room {
         }
         entries.sort();
         let top5: String = entries[0..5]
-        .iter()
-        .map(|x| x.1)
-        .collect();
+            .iter()
+            .map(|x| x.1)
+            .collect();
         top5 == self.checksum
     }
 

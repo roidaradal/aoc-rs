@@ -26,7 +26,7 @@ pub fn solve() -> Solution {
 
 fn data(full: bool) -> Vec<Vec<u32>> {
     io::read_lines(17, 2, full)
-    .iter()
-    .map(|x| conv::to_vec_int(x, " "))
-    .collect()
+        .iter()
+        .map(|x| conv::to_vec_int(x, " "))
+        .collect()
 }

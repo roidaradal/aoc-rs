@@ -36,9 +36,9 @@ struct Keypad {
 
 fn create_grid(rows: Vec<&str>) -> Vec<String> {
     rows
-    .iter()
-    .map(|x| x.to_string())
-    .collect()
+        .iter()
+        .map(|x| x.to_string())
+        .collect()
 }
 
 fn solve_code(pad: Keypad, moves_list: Vec<String>) -> String {

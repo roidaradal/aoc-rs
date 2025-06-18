@@ -26,9 +26,9 @@ fn data(full: bool) -> Vec<Delta> {
         ('v', grid::D),
     ]);
     io::first_line(15, 3, full)
-    .chars()
-    .map(|x| delta[&x])
-    .collect()
+        .chars()
+        .map(|x| delta[&x])
+        .collect()
 }
 
 fn walk(moves: Vec<Delta>) -> HashSet<Coords> {

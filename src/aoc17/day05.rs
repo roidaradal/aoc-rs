@@ -12,9 +12,9 @@ pub fn solve() -> Solution {
 
 fn data(full: bool) -> Vec<i32> {
     io::read_lines(17, 5, full)
-    .iter()
-    .map(|x| x.parse().unwrap())
-    .collect()
+        .iter()
+        .map(|x| x.parse().unwrap())
+        .collect()
 }
 
 fn count_jumps(full: bool, clip: bool) -> u32 {

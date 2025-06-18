@@ -18,16 +18,16 @@ pub fn solve() -> Solution {
     while value <= goal {
         let curr = spiral_coords(x);
         let near: Vec<Coords> = grid::surround8(curr)
-        .into_iter()
-        .filter(|c| spiral.contains_key(c))
-        .collect();
+            .into_iter()
+            .filter(|c| spiral.contains_key(c))
+            .collect();
         value = near
-        .iter()
-        .map(|c| {
-            let idx = (*spiral.get(c).unwrap()) as usize;
-            values[idx]
-        })
-        .sum();
+            .iter()
+            .map(|c| {
+                let idx = (*spiral.get(c).unwrap()) as usize;
+                values[idx]
+            })
+            .sum();
         values.push(value);
         spiral.insert(curr, x);
         x += 1;

@@ -14,9 +14,9 @@ pub fn solve() -> Solution {
 
 fn data(full: bool) -> Vec<u32> {
     io::read_lines(19, 1, full)
-    .iter()
-    .map(|x| x.parse().unwrap())
-    .collect()
+        .iter()
+        .map(|x| x.parse().unwrap())
+        .collect()
 }
 
 fn fuel(x: u32) -> u32 {

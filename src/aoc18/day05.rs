@@ -16,8 +16,8 @@ pub fn solve() -> Solution {
     let mut min_length = usize::MAX;
     for (i, skip_char) in chars.iter().enumerate() {
         let word2: String = word.chars()
-        .filter(|x| x.to_ascii_lowercase() != *skip_char)
-        .collect();
+            .filter(|x| x.to_ascii_lowercase() != *skip_char)
+            .collect();
         let word2 = fully_compress(word2);
         let word_length = word2.len();
         min_length = cmp::min(min_length, word_length);

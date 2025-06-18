@@ -3,14 +3,14 @@ use std::{fmt::Debug, str::FromStr};
 pub fn to_vec_int<T: FromStr>(line: &String, sep: &str) -> Vec<T> where <T as FromStr>::Err: Debug{
     if sep == " " {
         line
-        .split_whitespace()
-        .map(|x| x.parse().unwrap())
-        .collect()
+            .split_whitespace()
+            .map(|x| x.parse().unwrap())
+            .collect()
     } else {
         line
-        .split(sep)
-        .map(|x| x.trim().parse().unwrap())
-        .collect()
+            .split(sep)
+            .map(|x| x.trim().parse().unwrap())
+            .collect()
     }
 }
 

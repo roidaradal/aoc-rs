@@ -23,7 +23,7 @@ pub fn solve() -> Solution {
 
 fn data(full: bool) -> Vec<Dims3> {
     io::read_lines(15, 2, full)
-    .iter()
-    .map(|x| conv::to_dims3(x, "x"))
-    .collect()
+        .iter()
+        .map(|x| conv::to_dims3(x, "x"))
+        .collect()
 }

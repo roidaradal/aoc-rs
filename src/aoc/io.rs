@@ -9,10 +9,10 @@ pub fn read_lines(year: u8, day: u8, full: bool) -> Vec<String> {
     let folder = if full { format!("20{}",year) } else { String::from("test") };
     let path = format!("{}/{}/{}{:0>2}.txt", root_dir(), folder, year, day);
     fs::read_to_string(path)
-    .unwrap()
-    .lines()
-    .map(String::from)
-    .collect()
+        .unwrap()
+        .lines()
+        .map(String::from)
+        .collect()
 }
 
 pub fn first_line(year: u8, day: u8, full: bool) -> String {
@@ -25,14 +25,14 @@ pub fn get_solution(year: u8, day: u8) -> Solution {
     let path = format!("{}/solutions/all.csv", root_dir());
     let mut solutions: HashMap<String, Solution> = HashMap::new();
     fs::read_to_string(path)
-    .unwrap()
-    .lines()
-    .for_each(|line| {
-        let p: Vec<&str> = line.split("|").collect();
-        let k = format!("{}{}", p[0], p[1]);
-        let v = (String::from(p[2]), String::from(p[3]));
-        solutions.insert(k, v);
-    });
+        .unwrap()
+        .lines()
+        .for_each(|line| {
+            let p: Vec<&str> = line.split("|").collect();
+            let k = format!("{}{}", p[0], p[1]);
+            let v = (String::from(p[2]), String::from(p[3]));
+            solutions.insert(k, v);
+        });
     let key = format!("{}{:0>2}", year, day);
     solutions.get(&key).unwrap().clone()
 }
