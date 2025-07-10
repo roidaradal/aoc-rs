@@ -15,6 +15,16 @@ pub fn read_lines(year: u8, day: u8, full: bool) -> Vec<String> {
         .collect()
 }
 
+pub fn read_raw_lines(year: u8, day: u8, full: bool) -> Vec<String> {
+    let folder = if full { format!("20{}",year) } else { String::from("test") };
+    let path = format!("{}/{}/{}{:0>2}.txt", root_dir(), folder, year, day);
+    fs::read_to_string(path)
+        .unwrap()
+        .split("\n")
+        .map(String::from)
+        .collect()
+}
+
 pub fn first_line(year: u8, day: u8, full: bool) -> String {
     read_lines(year, day, full)[0].to_string()
     // lines.first().unwrap().to_string()
