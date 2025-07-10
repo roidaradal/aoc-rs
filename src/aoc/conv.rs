@@ -28,6 +28,11 @@ pub fn to_dims2(line: &str, sep: &str, row_col: bool) -> (u32, u32) {
     }
 }
 
+pub fn to_int2(line: &str, sep: &str) -> (i32, i32) {
+    let p = to_vec_int(line, sep);
+    (p[0], p[1])
+}
+
 pub fn to_coords(line: &str, sep: &str, row_col: bool) -> (i32, i32) {
     let c = to_vec_int(line, sep);
     if row_col {
