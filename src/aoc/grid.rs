@@ -1,4 +1,5 @@
 pub type Coords = (i32, i32);
+pub type GridCoords = (usize, usize);
 pub type Delta  = (i32, i32);
 pub type Dims2  = (u32, u32);
 pub type Dims3  = (u32, u32, u32);
