@@ -160,6 +160,7 @@ fn solve23(day: u8) -> Solution {
         2 => aoc23::day02::solve(),
         3 => aoc23::day03::solve(),
         4 => aoc23::day04::solve(),
+        5 => aoc23::day05::solve(),
         _ => panic!("Invalid day"),
     }
 }
