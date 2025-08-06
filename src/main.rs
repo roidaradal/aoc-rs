@@ -13,6 +13,7 @@ mod aoc20;
 mod aoc21;
 mod aoc22;
 mod aoc23;
+mod aoc24;
 
 fn main() {
     let args: Vec<String> = env::args().skip(1).collect();
@@ -62,6 +63,7 @@ fn solve(year: u8, day: u8) -> Solution {
         21 => solve21(day),
         22 => solve22(day),
         23 => solve23(day),
+        24 => solve24(day),
         _ => panic!("Invalid year")
     }
 }
@@ -161,6 +163,13 @@ fn solve23(day: u8) -> Solution {
         3 => aoc23::day03::solve(),
         4 => aoc23::day04::solve(),
         5 => aoc23::day05::solve(),
+        _ => panic!("Invalid day"),
+    }
+}
+
+fn solve24(day: u8) -> Solution {
+    match day {
+        1 => aoc24::day01::solve(),
         _ => panic!("Invalid day"),
     }
 }
