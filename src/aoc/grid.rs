@@ -72,3 +72,7 @@ pub fn surround8(c: Coords) -> Vec<Coords> {
 pub fn new<T: Copy>(initial: T, rows: usize, cols: usize) -> Grid<T> {
     vec![vec![initial; cols]; rows]
 }
+
+pub fn get_delta(c1: Coords, c2: Coords) -> Delta {
+    return (c2.0 - c1.0, c2.1 - c1.1)
+}
