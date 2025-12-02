@@ -4,16 +4,9 @@ use dotenv::dotenv;
 use crate::aoc::Solution;
 
 mod aoc;
-mod aoc15;
-mod aoc16;
-mod aoc17;
-mod aoc18;
-mod aoc19;
-mod aoc20;
-mod aoc21;
-mod aoc22;
-mod aoc23;
-mod aoc24;
+mod aoc15; mod aoc16; mod aoc17; mod aoc18; mod aoc19;
+mod aoc20; mod aoc21; mod aoc22; mod aoc23; mod aoc24;
+mod aoc25;
 
 fn main() {
     let args: Vec<String> = env::args().skip(1).collect();
@@ -64,6 +57,7 @@ fn solve(year: u8, day: u8) -> Solution {
         22 => solve22(day),
         23 => solve23(day),
         24 => solve24(day),
+        25 => solve25(day),
         _ => panic!("Invalid year")
     }
 }
@@ -174,6 +168,13 @@ fn solve24(day: u8) -> Solution {
         3 => aoc24::day03::solve(),
         4 => aoc24::day04::solve(),
         5 => aoc24::day05::solve(),
+        _ => panic!("Invalid day"),
+    }
+}
+
+fn solve25(day: u8) -> Solution {
+    match day {
+        1 => aoc25::day01::solve(),
         _ => panic!("Invalid day"),
     }
 }
