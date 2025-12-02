@@ -175,6 +175,7 @@ fn solve24(day: u8) -> Solution {
 fn solve25(day: u8) -> Solution {
     match day {
         1 => aoc25::day01::solve(),
+        2 => aoc25::day02::solve(),
         _ => panic!("Invalid day"),
     }
 }
