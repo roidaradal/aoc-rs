@@ -14,6 +14,13 @@ pub fn to_vec_int<T: FromStr>(line: &str, sep: &str) -> Vec<T> where <T as FromS
     }
 }
 
+pub fn to_int_line(line: &str) -> Vec<u32> {
+    line
+        .chars()
+        .map(|c| c.to_digit(10).unwrap())
+        .collect()
+}
+
 pub fn to_dims3(line: &str, sep: &str) -> (u32, u32, u32) {
     let p = to_vec_int(line, sep);
     (p[0], p[1], p[2])
